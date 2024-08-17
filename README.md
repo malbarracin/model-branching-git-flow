@@ -73,3 +73,130 @@ gitGraph
 
 ```
 
+
+## Implementación del Modelo de Branching##
+
+Basado en la información y ejemplos proporcionados, aquí está un modelo detallado de branching para el equipo:
+
+1. Branches Principales
+   - ```master```: Código listo para producción.
+   - ```develop```: Código para la próxima versión.
+
+2. Branches de Soporte
+ 
+  - ```feature/*```: Nuevas funcionalidades.
+  - ```fix/*```: Correcciones de errores.
+  - ```release/*```: Preparación de versiones.
+  - ```hotfix/*```: Correcciones críticas en producción.
+
+3. Flujo de Trabajo
+ 
+    1. Crear una nueva funcionalidad o corrección:   
+    ```shell
+        git checkout develop
+        git pull origin develop
+        git checkout -b feature/123_mi-nueva-caracteristica
+        git checkout -b fix/435_mi-correccion
+    ```
+    2. Trabajar y hacer commits siguiendo las convenciones:
+    ```shell
+        commit -m "feat: Añadida nueva funcionalidad X"
+        # o
+        commit -m "fix: Corregido error en el módulo Y" 
+    ```    
+
+    3. Trabajar y hacer commits siguiendo las convenciones:
+    ```shell
+        git checkout develop
+        git pull origin develop
+        git merge --no-ff feature/123_mi-nueva-caracteristica
+        git push origin develop
+        # o
+        git merge --no-ff fix/435_mi-correccion
+        git push origin develop
+    ```   
+
+    4. Preparar y finalizar un release:
+    ```shell
+        git checkout develop
+        git pull origin develop
+        git checkout -b release/v1.0.0
+
+        # Realizar pruebas y ajustes necesarios
+
+        git checkout test
+        git pull origin test
+        git merge --no-ff release/v1.0.0
+        git push origin test
+
+        git checkout master
+        git pull origin master
+        git merge --no-ff release/v1.0.0
+        git tag -a v1.0.0 -m "Release v1.0.0"
+        git push origin master
+        git push origin --tags
+
+        git checkout develop
+        git pull origin develop
+        git merge --no-ff release/v1.0.0
+        git push origin develop
+    ```    
+
+    
+    5. Aplicar un hotfix:
+    ```shell
+        git checkout master
+        git pull origin master
+        git checkout -b hotfix/v1.0.1
+
+        # Realizar corrección
+
+        git checkout master
+        git pull origin master
+        git merge --no-ff hotfix/v1.0.1
+        git tag -a v1.0.1 -m "Hotfix v1.0.1"
+        git push origin master
+        git push origin --tags
+
+        git checkout develop
+        git pull origin develop
+        git merge --no-ff hotfix/v1.0.1
+        git push origin develop
+    ```   
+
+## Convenciones de Commits##
+
+Utiliza convenciones estandarizadas para los mensajes de commit:
+
+```commit -m "<type>[optional scope]: <description>"```
+
+# Ejemplos de type:
+
+   - ```feat```: Nueva característica.
+   - ```fix```: Corrección de errores.
+   - ```docs```: Cambios en la documentación.
+   - ```style```: Cambios de formato.
+   - ```refactor```: Refactorización de código.
+   - ```test```: Añadir o corregir pruebas.
+
+## Ejemplo Práctico: Creación de una Rama de Feature
+
+Supongamos que estamos trabajando en un proyecto llamado mi-proyecto y necesitamos añadir una nueva funcionalidad llamada "autenticación de usuarios". A continuación se detallan los pasos:
+
+1. ## Clonar el repositorio y navegar al proyecto
+
+    Si aún no tienes el repositorio clonado, hazlo con el siguiente comando:
+
+    ```shell
+       git clone https://github.com/usuario/mi-proyecto.git 
+       cd mi-proyecto
+    ```
+2. ## Crear una nueva rama de feature
+   
+    Primero, asegúrate de estar en la rama develop y de tener la última versión:
+
+    ```shell 
+       git checkout develop
+       git pull origin develop
+    ```
+
