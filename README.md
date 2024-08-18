@@ -200,3 +200,157 @@ Supongamos que estamos trabajando en un proyecto llamado mi-proyecto y necesitam
        git pull origin develop
     ```
 
+    Luego, crea una nueva rama para la característica:
+   
+    ```shell 
+       git checkout -b feature/autenticacion-usuarios
+    ```
+
+3. ## Realizar cambios y hacer commits
+
+    Haz los cambios necesarios en el código. Por ejemplo, podrías añadir un nuevo módulo de autenticación.
+    Luego, realiza los commits siguiendo las convenciones. Por ejemplo:
+    
+    ```shell 
+       git add .
+       git commit -m "feat: Añadido módulo de autenticación de usuarios"
+    ```
+
+    Si realizas más cambios, asegúrate de describir adecuadamente cada commit:
+
+     ```shell 
+       git add .
+       git commit -m "fix: Corregido error en la validación de tokens"
+    ```
+
+4. ## Subir la rama a remoto
+ 
+    Para compartir tu trabajo y que otros puedan revisarlo, sube la rama al repositorio remoto:
+    
+    ```shell 
+       git push origin feature/autenticacion-usuarios
+    ```
+
+5. ## Crear un Merge Request (MR)  
+ 
+    Ve a tu plataforma de gestión de repositorios (como GitHub, GitLab, Bitbucket) y crea un Merge Request (MR) desde la rama  ```feature/autenticacion-usuarios ``` hacia  ```develop ```.
+
+6. ## Revisar y fusionar la rama
+    
+    Una vez aprobado el MR, fusiona la rama de feature en develop. Esto puede hacerse desde la interfaz web de tu plataforma de repositorios o mediante comandos de Git. Desde la línea de comandos:
+ 
+    ```shell 
+       git checkout develop
+       git pull origin develop
+       git merge --no-ff feature/autenticacion-usuarios
+       git push origin develop
+    ```
+
+```mermaid
+%%{init: { 'logLevel': 'debug', 'theme': 'dark', 'gitGraph': {'showBranches': true, 'showCommitLabel':true,'mainBranchName': 'master'}} }%%
+gitGraph
+   commit id: "Inicio de master" tag: "v1.0"
+   branch develop
+   commit id: "Inicio de develop"
+   checkout develop
+
+   branch feature/autenticacion-usuarios
+   commit id: "feat: Añadida autenticación de usuarios"
+   
+   commit id: "Inicio Pull Request de feature a develop" type: HIGHLIGHT
+   commit id: "Revisión Pull Request" type: HIGHLIGHT
+   commit id: "fix: Mejora en la autenticación de usuarios"
+   commit id: "Revisión aprobada Pull Request" type: HIGHLIGHT
+   checkout develop
+   merge feature/autenticacion-usuarios id: "Merge feature a develop" type: HIGHLIGHT
+   
+   checkout master
+   commit
+
+```
+
+
+# Ejemplo Práctico: Creación de una Rama de Fix
+
+Supongamos que estamos trabajando en un proyecto llamado mi-proyecto y necesitamos corregir un error en la validación de formularios. A continuación se detallan los pasos:
+
+1. ## Clonar el repositorio y navegar al proyecto
+    
+    Si aún no tienes el repositorio clonado, hazlo con el siguiente comando:
+
+    ```shell 
+       git clone https://github.com/usuario/mi-proyecto.git
+       cd mi-proyecto
+    ```
+
+2. ## Clonar el repositorio y navegar al proyecto
+    
+    Crear una nueva rama de fix
+    Primero, asegúrate de estar en la rama ```develop``` y de tener la última versión:
+
+    ```shell 
+       git checkout develop
+       git pull origin develop
+    ```
+
+    Luego, crea una nueva rama para la corrección:
+
+    ```shell 
+       git checkout -b fix/validacion-formularios
+    ```
+
+3. ## Clonar el repositorio y navegar al proyecto
+    
+    Crear una nueva rama de fix
+    Primero, asegúrate de estar en la rama ```develop``` y de tener la última versión:
+
+    ```shell 
+       git checkout develop
+       git pull origin develop
+    ```
+
+4. ##  Realizar cambios y hacer commits
+    Haz los cambios necesarios en el código para corregir el error.
+    Luego, realiza los commits siguiendo las convenciones. Por ejemplo:
+
+    ```shell 
+       git add .
+       git commit -m "fix: Corregido error en la validación de formularios"
+    ```
+
+5. ## Crear un Merge Request (MR)
+    Ve a tu plataforma de gestión de repositorios (como GitHub, GitLab, Bitbucket) y crea un Merge Request (MR) desde la rama fix/validacion-formularios hacia ```develop```.
+
+6. ## Revisar y fusionar la rama
+ 
+    Una vez aprobado el MR, fusiona la rama de fix en ```develop```. Esto puede hacerse desde la interfaz web de tu plataforma de repositorios o mediante comandos de Git. Desde la línea de comandos:    
+ 
+    ```shell 
+       git checkout develop
+       git pull origin develop
+       git merge --no-ff fix/validacion-formularios
+       git push origin develop
+    ```
+
+```mermaid
+%%{init: { 'logLevel': 'debug', 'theme': 'dark', 'gitGraph': {'showBranches': true, 'showCommitLabel':true,'mainBranchName': 'master'}} }%%
+ gitGraph
+   
+   commit id: "Inicio de master" tag: "v1.0"
+   branch develop
+   commit id: "Inicio de develop"
+   checkout develop
+
+   branch  fix/validacion-formularios
+   commit id: "fix: Corregido error en la validación de formularios"
+   
+   commit id: "Inicio Pull Request de fix a develop" type: HIGHLIGHT
+   commit id: "Revisión Pull Request" type: HIGHLIGHT
+   commit id: "Revisión aprobada Pull Request" type: HIGHLIGHT
+   checkout develop
+   merge fix/validacion-formularios id: "Merge fix a develop" type: HIGHLIGHT
+   
+   checkout master
+commit
+
+```
