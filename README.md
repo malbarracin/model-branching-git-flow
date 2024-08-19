@@ -79,90 +79,90 @@ gitGraph
 Basado en la información y ejemplos proporcionados, aquí está un modelo detallado de branching para el equipo:
 
 1. Branches Principales
-   - ```master```: Código listo para producción.
-   - ```develop```: Código para la próxima versión.
+    - ```master```: Código listo para producción.
+    - ```develop```: Código para la próxima versión.
 
 2. Branches de Soporte
  
-  - ```feature/*```: Nuevas funcionalidades.
-  - ```fix/*```: Correcciones de errores.
-  - ```release/*```: Preparación de versiones.
-  - ```hotfix/*```: Correcciones críticas en producción.
+    - ```feature/*```: Nuevas funcionalidades.
+    - ```fix/*```: Correcciones de errores.
+    - ```release/*```: Preparación de versiones.
+    - ```hotfix/*```: Correcciones críticas en producción.
 
 3. Flujo de Trabajo
  
     1. Crear una nueva funcionalidad o corrección:   
-    ```shell
-        git checkout develop
-        git pull origin develop
-        git checkout -b feature/123_mi-nueva-caracteristica
-        git checkout -b fix/435_mi-correccion
-    ```
+        ```shell
+            git checkout develop
+            git pull origin develop
+            git checkout -b feature/123_mi-nueva-caracteristica
+            git checkout -b fix/435_mi-correccion
+        ```
     2. Trabajar y hacer commits siguiendo las convenciones:
-    ```shell
-        commit -m "feat: Añadida nueva funcionalidad X"
-        # o
-        commit -m "fix: Corregido error en el módulo Y" 
-    ```    
+        ```shell
+            commit -m "feat: Añadida nueva funcionalidad X"
+            # o
+            commit -m "fix: Corregido error en el módulo Y" 
+        ```    
 
     3. Trabajar y hacer commits siguiendo las convenciones:
-    ```shell
-        git checkout develop
-        git pull origin develop
-        git merge --no-ff feature/123_mi-nueva-caracteristica
-        git push origin develop
-        # o
-        git merge --no-ff fix/435_mi-correccion
-        git push origin develop
-    ```   
+        ```shell
+            git checkout develop
+            git pull origin develop
+            git merge --no-ff feature/123_mi-nueva-caracteristica
+            git push origin develop
+            # o
+            git merge --no-ff fix/435_mi-correccion
+            git push origin develop
+        ```   
 
     4. Preparar y finalizar un release:
-    ```shell
-        git checkout develop
-        git pull origin develop
-        git checkout -b release/v1.0.0
+        ```shell
+            git checkout develop
+            git pull origin develop
+            git checkout -b release/v1.0.0
 
-        # Realizar pruebas y ajustes necesarios
+            # Realizar pruebas y ajustes necesarios
 
-        git checkout test
-        git pull origin test
-        git merge --no-ff release/v1.0.0
-        git push origin test
+            git checkout test
+            git pull origin test
+            git merge --no-ff release/v1.0.0
+            git push origin test
 
-        git checkout master
-        git pull origin master
-        git merge --no-ff release/v1.0.0
-        git tag -a v1.0.0 -m "Release v1.0.0"
-        git push origin master
-        git push origin --tags
+            git checkout master
+            git pull origin master
+            git merge --no-ff release/v1.0.0
+            git tag -a v1.0.0 -m "Release v1.0.0"
+            git push origin master
+            git push origin --tags
 
-        git checkout develop
-        git pull origin develop
-        git merge --no-ff release/v1.0.0
-        git push origin develop
-    ```    
+            git checkout develop
+            git pull origin develop
+            git merge --no-ff release/v1.0.0
+            git push origin develop
+        ```    
 
     
     5. Aplicar un hotfix:
-    ```shell
-        git checkout master
-        git pull origin master
-        git checkout -b hotfix/v1.0.1
+        ```shell
+            git checkout master
+            git pull origin master
+            git checkout -b hotfix/v1.0.1
 
-        # Realizar corrección
+            # Realizar corrección
 
-        git checkout master
-        git pull origin master
-        git merge --no-ff hotfix/v1.0.1
-        git tag -a v1.0.1 -m "Hotfix v1.0.1"
-        git push origin master
-        git push origin --tags
+            git checkout master
+            git pull origin master
+            git merge --no-ff hotfix/v1.0.1
+            git tag -a v1.0.1 -m "Hotfix v1.0.1"
+            git push origin master
+            git push origin --tags
 
-        git checkout develop
-        git pull origin develop
-        git merge --no-ff hotfix/v1.0.1
-        git push origin develop
-    ```   
+            git checkout develop
+            git pull origin develop
+            git merge --no-ff hotfix/v1.0.1
+            git push origin develop
+        ```   
 
 ## Convenciones de Commits##
 
